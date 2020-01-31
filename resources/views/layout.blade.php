@@ -64,15 +64,15 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-item">
+          <li class="nav-item has-treeview">
             <a href="/" class="{{Request::is('/') ? 'nav-link active' : 'nav-link' }}">
               <i class="fas fa-columns"></i>
               <p>
-                Dashboard
+                 Dashboard
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item has-treeview">
             <a href="/schedule" class="{{Request::is('schedule') ? 'nav-link active' : 'nav-link' }}">
               <i class="nav-icon far fa-calendar-alt"></i>
               <p>

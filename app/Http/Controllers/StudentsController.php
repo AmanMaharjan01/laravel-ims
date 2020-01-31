@@ -10,7 +10,7 @@ class StudentsController extends Controller
      public function index()
     {
         $std = students::paginate(4);
-        return view('/students',['students'=>$std]);
+        return view('students',['students'=>$std]);
     }
 
     
@@ -22,15 +22,28 @@ class StudentsController extends Controller
     
     public function store()
     {
-    	
+
+        request()->validate([
+              'name' => ['required','max:40'],
+              'address' => 'required',
+              'body' => 'required',
+              'profile' => 'required|image|mimes:jpg,jpeg,png,gif'
+        ]);
+
+        $fileName = request('name') . rand(0,99) . '.' .request()->file('profile')->getClientOriginalExtension();
+
+        $profile = request()->file('profile')->storeAs('upload/profile/', $fileName);
+
         $std = new students;
         $std->name = request('name');
         $std->address = request('address');
         $std->contact = request('contact');
+        $std->profile = $fileName;
 
-        $std->save();
+        if ($std->save();) {
 
-        return redirect('/students');
+            return redirect('/students')->with('status', 'Student inserted successfully!!');
+        }
 
     }
 
